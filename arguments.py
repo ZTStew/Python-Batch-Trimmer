@@ -3,7 +3,7 @@ Object handles command line arguments, stores them together for reference
 
 """
 
-import sys, glob
+import sys, glob, os
 
 class Arguments:
   def __init__(self, args):
@@ -25,6 +25,9 @@ class Arguments:
     self.directory = "./"
     # Collects all files inside of the given directory to trim
     self.input_files = glob.glob(f"{self.directory}/*" + self.file_type)
+    # Identifies the location the processed files are saved to
+    self.output_dir = "./output"
+
 
     self.assign_args()
 
@@ -48,3 +51,11 @@ class Arguments:
     if len(self.args) > 2:
       if "e" in self.args[2].lower():
         self.trim_direction = True
+
+  # Method creates output folder to store processed .mp4 files
+  def set_output_directory(self):
+    # Confirms if the specified output directory already exists
+    check = os.path.exists(self.output_dir)
+    # If the output directory doesn't already exist, create the output directory
+    if not check:
+      os.makedirs(self.output_dir)
