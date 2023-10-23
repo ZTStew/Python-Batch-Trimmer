@@ -1,6 +1,6 @@
 """
-Update Ideas:
-  add in the ability to handle command-line options
+Description:
+  Program searches given folder for video files and trims a specified number of seconds from the start or the end of the video. The file is then saved in a specified location.
 """
 
 import os, sys
@@ -9,7 +9,7 @@ from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 from arguments import Arguments
 
 # handles all argument informaiton given when program is executed
-arg = Arguments(sys.argv)
+arg = Arguments()
 arg.set_output_directory()
 
 
@@ -29,11 +29,11 @@ for input_file in arg.input_files:
   # Trims video from the start
   if not arg.trim_direction:
     # input file -> file that is being trimmed
-    # arg.trim_time -> amount of time to be trimmed from input file
+    # arg.trim_amount -> amount of time to be trimmed from input file
     # get_length(input_file) -> length of the file after trimming
     # targetname=output -> output file's path, name, and extension
-    ffmpeg_extract_subclip(input_file, arg.trim_time, get_length(input_file), targetname=output)
+    ffmpeg_extract_subclip(input_file, arg.trim_amount, get_length(input_file), targetname=output)
 
   # Trims video from the end
   if arg.trim_direction:
-    ffmpeg_extract_subclip(input_file, 0, get_length(input_file) - arg.trim_time, targetname=output)
+    ffmpeg_extract_subclip(input_file, 0, get_length(input_file) - arg.trim_amount, targetname=output)
