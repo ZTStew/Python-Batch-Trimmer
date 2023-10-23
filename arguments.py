@@ -3,7 +3,7 @@ Description:
   Object handles command line arguments, stores them together for reference
 """
 
-import sys, glob, os, argparse
+import glob, os, argparse
 
 class Arguments:
   def __init__(self):

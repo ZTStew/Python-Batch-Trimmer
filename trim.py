@@ -3,7 +3,7 @@ Description:
   Program searches given folder for video files and trims a specified number of seconds from the start or the end of the video. The file is then saved in a specified location.
 """
 
-import os, sys
+import os
 from moviepy.editor import VideoFileClip
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 from arguments import Arguments
